@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             this.panelIzbornik = new System.Windows.Forms.Panel();
-            this.panelPrikaz = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnPrijava = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnPrijava = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelPrikaz = new System.Windows.Forms.Panel();
+            this.btnKriptiraj = new System.Windows.Forms.Button();
+            this.btnPosalji = new System.Windows.Forms.Button();
             this.panelIzbornik.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelIzbornik
             // 
-            this.panelIzbornik.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panelIzbornik.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.panelIzbornik.Controls.Add(this.btnPosalji);
+            this.panelIzbornik.Controls.Add(this.btnKriptiraj);
             this.panelIzbornik.Controls.Add(this.button1);
             this.panelIzbornik.Controls.Add(this.btnPrijava);
             this.panelIzbornik.Controls.Add(this.label1);
@@ -47,51 +51,83 @@
             this.panelIzbornik.Size = new System.Drawing.Size(200, 722);
             this.panelIzbornik.TabIndex = 0;
             // 
-            // panelPrikaz
+            // button1
             // 
-            this.panelPrikaz.Location = new System.Drawing.Point(200, 0);
-            this.panelPrikaz.Name = "panelPrikaz";
-            this.panelPrikaz.Size = new System.Drawing.Size(806, 722);
-            this.panelPrikaz.TabIndex = 1;
+            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Location = new System.Drawing.Point(22, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 59);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Generiranje ključa (RSA)";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // btnPrijava
+            // 
+            this.btnPrijava.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPrijava.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPrijava.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnPrijava.Location = new System.Drawing.Point(22, 50);
+            this.btnPrijava.Name = "btnPrijava";
+            this.btnPrijava.Size = new System.Drawing.Size(160, 50);
+            this.btnPrijava.TabIndex = 1;
+            this.btnPrijava.Text = "Prijava";
+            this.btnPrijava.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 313);
+            this.label1.Location = new System.Drawing.Point(47, 305);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "- - - - - - - - - - - -";
             // 
-            // btnPrijava
+            // panelPrikaz
             // 
-            this.btnPrijava.Location = new System.Drawing.Point(34, 66);
-            this.btnPrijava.Name = "btnPrijava";
-            this.btnPrijava.Size = new System.Drawing.Size(99, 41);
-            this.btnPrijava.TabIndex = 1;
-            this.btnPrijava.Text = "Prijava";
-            this.btnPrijava.UseVisualStyleBackColor = true;
+            this.panelPrikaz.Location = new System.Drawing.Point(200, 0);
+            this.panelPrikaz.Name = "panelPrikaz";
+            this.panelPrikaz.Size = new System.Drawing.Size(987, 722);
+            this.panelPrikaz.TabIndex = 1;
             // 
-            // button1
+            // btnKriptiraj
             // 
-            this.button1.Location = new System.Drawing.Point(12, 126);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 47);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Generiranje knjuča (RSA)";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnKriptiraj.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnKriptiraj.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnKriptiraj.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnKriptiraj.Location = new System.Drawing.Point(22, 373);
+            this.btnKriptiraj.Name = "btnKriptiraj";
+            this.btnKriptiraj.Size = new System.Drawing.Size(160, 50);
+            this.btnKriptiraj.TabIndex = 3;
+            this.btnKriptiraj.Text = "Kriptiraj";
+            this.btnKriptiraj.UseVisualStyleBackColor = false;
+            // 
+            // btnPosalji
+            // 
+            this.btnPosalji.BackColor = System.Drawing.Color.MediumBlue;
+            this.btnPosalji.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPosalji.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnPosalji.Location = new System.Drawing.Point(22, 451);
+            this.btnPosalji.Name = "btnPosalji";
+            this.btnPosalji.Size = new System.Drawing.Size(160, 50);
+            this.btnPosalji.TabIndex = 4;
+            this.btnPosalji.Text = "Pošalji";
+            this.btnPosalji.UseVisualStyleBackColor = false;
             // 
             // FrmIzbornik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.ClientSize = new System.Drawing.Size(1191, 721);
             this.Controls.Add(this.panelPrikaz);
             this.Controls.Add(this.panelIzbornik);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "FrmIzbornik";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Izbornik";
             this.panelIzbornik.ResumeLayout(false);
             this.panelIzbornik.PerformLayout();
             this.ResumeLayout(false);
@@ -105,6 +141,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnPrijava;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnPosalji;
+        private System.Windows.Forms.Button btnKriptiraj;
     }
 }
 
