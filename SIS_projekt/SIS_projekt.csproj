@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrentUser.cs" />
+    <Compile Include="FrmGeneriranjeRSA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGeneriranjeRSA.Designer.cs">
+      <DependentUpon>FrmGeneriranjeRSA.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmIzbornik.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Simetricno.Designer.cs">
       <DependentUpon>Simetricno.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmGeneriranjeRSA.resx">
+      <DependentUpon>FrmGeneriranjeRSA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmIzbornik.resx">
       <DependentUpon>FrmIzbornik.cs</DependentUpon>
     </EmbeddedResource>

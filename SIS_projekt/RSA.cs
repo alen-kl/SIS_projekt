@@ -24,8 +24,8 @@ namespace SIS_projekt
         public void generirajKljuceve()
         {
             rsa = new RSACryptoServiceProvider();
-            //File.WriteAllText("../../RSA/javni_kljuc.txt", rsa.ToXmlString(false));
-            //File.WriteAllText("../../RSA/privatni_kljuc.txt", rsa.ToXmlString(true));
+            File.WriteAllText("../../RSA/javni_kljuc.txt", rsa.ToXmlString(false));
+            File.WriteAllText("../../RSA/privatni_kljuc.txt", rsa.ToXmlString(true));
             privatniKljuc = rsa.ToXmlString(true);
             javniKljuc = rsa.ToXmlString(false);
 
@@ -48,5 +48,22 @@ namespace SIS_projekt
             }
 
         }
+
+        public void spremiNoviKljuc(string email)
+        {
+            generirajKljuceve();
+            using (var client = new WebClient())
+            {
+                var values = new NameValueCollection();
+                values["email"] = email;
+                values["noviKljuc"] = javniKljuc;
+
+                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/registriranje.php", values);
+
+                var responseString = Encoding.Default.GetString(response);
+               
+            }
+        }
+
     }
 }

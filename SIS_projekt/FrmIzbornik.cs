@@ -47,5 +47,15 @@ namespace SIS_projekt
             panelPrikaz.Controls.Add(frmPrijava);
             frmPrijava.Show();
         }
+
+        private void btnGeneriranjeKljucaRSA_Click(object sender, EventArgs e)
+        {
+            panelPrikaz.Controls.Clear();
+            FrmGeneriranjeRSA frmGeneriranjeRsa = new FrmGeneriranjeRSA();
+            frmGeneriranjeRsa.TopLevel = false;
+            frmGeneriranjeRsa.FormBorderStyle = FormBorderStyle.None;
+            panelPrikaz.Controls.Add(frmGeneriranjeRsa);
+            frmGeneriranjeRsa.Show();
+        }
     }
 }

@@ -31,7 +31,7 @@
             this.panelIzbornik = new System.Windows.Forms.Panel();
             this.btnPosalji = new System.Windows.Forms.Button();
             this.btnKriptiraj = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGeneriranjeKljucaRSA = new System.Windows.Forms.Button();
             this.btnPrijava = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelPrikaz = new System.Windows.Forms.Panel();
@@ -43,7 +43,7 @@
             this.panelIzbornik.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.panelIzbornik.Controls.Add(this.btnPosalji);
             this.panelIzbornik.Controls.Add(this.btnKriptiraj);
-            this.panelIzbornik.Controls.Add(this.button1);
+            this.panelIzbornik.Controls.Add(this.btnGeneriranjeKljucaRSA);
             this.panelIzbornik.Controls.Add(this.btnPrijava);
             this.panelIzbornik.Controls.Add(this.label1);
             this.panelIzbornik.Location = new System.Drawing.Point(0, 0);
@@ -77,17 +77,18 @@
             this.btnKriptiraj.UseVisualStyleBackColor = false;
             this.btnKriptiraj.Click += new System.EventHandler(this.btnKriptiraj_Click);
             // 
-            // button1
+            // btnGeneriranjeKljucaRSA
             // 
-            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(22, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 59);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Generiranje ključa (RSA)";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnGeneriranjeKljucaRSA.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnGeneriranjeKljucaRSA.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnGeneriranjeKljucaRSA.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnGeneriranjeKljucaRSA.Location = new System.Drawing.Point(22, 123);
+            this.btnGeneriranjeKljucaRSA.Name = "btnGeneriranjeKljucaRSA";
+            this.btnGeneriranjeKljucaRSA.Size = new System.Drawing.Size(160, 59);
+            this.btnGeneriranjeKljucaRSA.TabIndex = 2;
+            this.btnGeneriranjeKljucaRSA.Text = "Generiranje ključa (RSA)";
+            this.btnGeneriranjeKljucaRSA.UseVisualStyleBackColor = false;
+            this.btnGeneriranjeKljucaRSA.Click += new System.EventHandler(this.btnGeneriranjeKljucaRSA_Click);
             // 
             // btnPrijava
             // 
@@ -141,7 +142,7 @@
 
         private System.Windows.Forms.Panel panelIzbornik;
         private System.Windows.Forms.Panel panelPrikaz;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGeneriranjeKljucaRSA;
         private System.Windows.Forms.Button btnPrijava;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPosalji;
