@@ -44,6 +44,7 @@
             // 
             this.txtKorisnicko.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtKorisnicko.Location = new System.Drawing.Point(272, 75);
+            this.txtKorisnicko.MaxLength = 15;
             this.txtKorisnicko.Name = "txtKorisnicko";
             this.txtKorisnicko.Size = new System.Drawing.Size(257, 34);
             this.txtKorisnicko.TabIndex = 1;
@@ -52,6 +53,7 @@
             // 
             this.txtEMail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEMail.Location = new System.Drawing.Point(272, 140);
+            this.txtEMail.MaxLength = 30;
             this.txtEMail.Name = "txtEMail";
             this.txtEMail.Size = new System.Drawing.Size(257, 34);
             this.txtEMail.TabIndex = 2;
@@ -60,6 +62,7 @@
             // 
             this.txtLozinka.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLozinka.Location = new System.Drawing.Point(272, 204);
+            this.txtLozinka.MaxLength = 10;
             this.txtLozinka.Name = "txtLozinka";
             this.txtLozinka.PasswordChar = '¤';
             this.txtLozinka.Size = new System.Drawing.Size(257, 34);
@@ -69,6 +72,7 @@
             // 
             this.txtPotvrdaLozinke.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPotvrdaLozinke.Location = new System.Drawing.Point(272, 269);
+            this.txtPotvrdaLozinke.MaxLength = 10;
             this.txtPotvrdaLozinke.Name = "txtPotvrdaLozinke";
             this.txtPotvrdaLozinke.PasswordChar = '¤';
             this.txtPotvrdaLozinke.Size = new System.Drawing.Size(257, 34);
@@ -125,6 +129,7 @@
             this.btnRegistrirajSe.TabIndex = 8;
             this.btnRegistrirajSe.Text = "Registriraj se";
             this.btnRegistrirajSe.UseVisualStyleBackColor = false;
+            this.btnRegistrirajSe.Click += new System.EventHandler(this.btnRegistrirajSe_Click);
             // 
             // btnOdustani
             // 

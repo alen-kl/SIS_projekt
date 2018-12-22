@@ -73,6 +73,7 @@
     <Compile Include="FrmRegistracija.Designer.cs">
       <DependentUpon>FrmRegistracija.cs</DependentUpon>
     </Compile>
+    <Compile Include="RSA.cs" />
     <Compile Include="Simetricno.cs">
       <SubType>Form</SubType>
     </Compile>
