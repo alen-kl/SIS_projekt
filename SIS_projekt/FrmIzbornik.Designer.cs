@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.panelIzbornik = new System.Windows.Forms.Panel();
+            this.btnPosalji = new System.Windows.Forms.Button();
+            this.btnKriptiraj = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnPrijava = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelPrikaz = new System.Windows.Forms.Panel();
-            this.btnKriptiraj = new System.Windows.Forms.Button();
-            this.btnPosalji = new System.Windows.Forms.Button();
             this.panelIzbornik.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +50,31 @@
             this.panelIzbornik.Name = "panelIzbornik";
             this.panelIzbornik.Size = new System.Drawing.Size(200, 722);
             this.panelIzbornik.TabIndex = 0;
+            // 
+            // btnPosalji
+            // 
+            this.btnPosalji.BackColor = System.Drawing.Color.MediumBlue;
+            this.btnPosalji.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPosalji.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnPosalji.Location = new System.Drawing.Point(22, 451);
+            this.btnPosalji.Name = "btnPosalji";
+            this.btnPosalji.Size = new System.Drawing.Size(160, 50);
+            this.btnPosalji.TabIndex = 4;
+            this.btnPosalji.Text = "Pošalji";
+            this.btnPosalji.UseVisualStyleBackColor = false;
+            // 
+            // btnKriptiraj
+            // 
+            this.btnKriptiraj.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnKriptiraj.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnKriptiraj.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnKriptiraj.Location = new System.Drawing.Point(22, 373);
+            this.btnKriptiraj.Name = "btnKriptiraj";
+            this.btnKriptiraj.Size = new System.Drawing.Size(160, 50);
+            this.btnKriptiraj.TabIndex = 3;
+            this.btnKriptiraj.Text = "Kriptiraj";
+            this.btnKriptiraj.UseVisualStyleBackColor = false;
+            this.btnKriptiraj.Click += new System.EventHandler(this.btnKriptiraj_Click);
             // 
             // button1
             // 
@@ -90,30 +115,6 @@
             this.panelPrikaz.Name = "panelPrikaz";
             this.panelPrikaz.Size = new System.Drawing.Size(987, 722);
             this.panelPrikaz.TabIndex = 1;
-            // 
-            // btnKriptiraj
-            // 
-            this.btnKriptiraj.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnKriptiraj.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnKriptiraj.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnKriptiraj.Location = new System.Drawing.Point(22, 373);
-            this.btnKriptiraj.Name = "btnKriptiraj";
-            this.btnKriptiraj.Size = new System.Drawing.Size(160, 50);
-            this.btnKriptiraj.TabIndex = 3;
-            this.btnKriptiraj.Text = "Kriptiraj";
-            this.btnKriptiraj.UseVisualStyleBackColor = false;
-            // 
-            // btnPosalji
-            // 
-            this.btnPosalji.BackColor = System.Drawing.Color.MediumBlue;
-            this.btnPosalji.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPosalji.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPosalji.Location = new System.Drawing.Point(22, 451);
-            this.btnPosalji.Name = "btnPosalji";
-            this.btnPosalji.Size = new System.Drawing.Size(160, 50);
-            this.btnPosalji.TabIndex = 4;
-            this.btnPosalji.Text = "Pošalji";
-            this.btnPosalji.UseVisualStyleBackColor = false;
             // 
             // FrmIzbornik
             // 

@@ -16,5 +16,16 @@ namespace SIS_projekt
         {
             InitializeComponent();
         }
+
+        private void btnKriptiraj_Click(object sender, EventArgs e)
+        {
+            panelPrikaz.Controls.Clear();
+            Simetricno frmSimetricno = new Simetricno();
+            frmSimetricno.TopLevel = false;
+            frmSimetricno.FormBorderStyle = FormBorderStyle.None;
+            panelPrikaz.Controls.Add(frmSimetricno);
+            frmSimetricno.Show();
+
+        }
     }
 }
