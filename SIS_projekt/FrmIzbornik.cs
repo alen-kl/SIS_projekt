@@ -27,5 +27,15 @@ namespace SIS_projekt
             frmSimetricno.Show();
 
         }
+
+        private void btnPosalji_Click(object sender, EventArgs e)
+        {
+            panelPrikaz.Controls.Clear();
+            FrmSend frmSend = new FrmSend();
+            frmSend.TopLevel = false;
+            frmSend.FormBorderStyle = FormBorderStyle.None;
+            panelPrikaz.Controls.Add(frmSend);
+            frmSend.Show();
+        }
     }
 }
