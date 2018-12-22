@@ -7,6 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.Web;
+using System.Collections.Specialized;
+using System.IO;
+using System.Diagnostics;
+using System.Threading;
 
 namespace SIS_projekt
 {
@@ -42,6 +48,42 @@ namespace SIS_projekt
         {
             FrmRegistracija frmRegistracija = new FrmRegistracija();
             frmRegistracija.ShowDialog();
+        }
+
+        private void btnPrijaviSe_Click(object sender, EventArgs e)
+        {
+            string podatakZaPrijavu = null;
+            if (radioKorIme.Checked)
+            {
+                podatakZaPrijavu = txtKorIme.Text;
+            }
+            else
+            {
+                podatakZaPrijavu = txtMail.Text;
+            }
+            string lozinka = txtLozinka.Text;
+
+            using (var client = new WebClient())
+            {
+                var values = new NameValueCollection();
+                values["logPodatak"] = podatakZaPrijavu;
+                values["lozinka"] = lozinka;
+
+                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/prijava.php", values);
+
+                var responseString = Encoding.Default.GetString(response);
+
+                if (responseString == "neuspjesno")
+                {
+                    MessageBox.Show("Neuspješna prijava!", ":((", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    //prijava
+                }
+
+            }
+
         }
     }
 }

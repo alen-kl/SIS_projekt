@@ -107,6 +107,7 @@
             this.btnPrijaviSe.TabIndex = 4;
             this.btnPrijaviSe.Text = "Prijavi se";
             this.btnPrijaviSe.UseVisualStyleBackColor = false;
+            this.btnPrijaviSe.Click += new System.EventHandler(this.btnPrijaviSe_Click);
             // 
             // radioMail
             // 
