@@ -37,5 +37,15 @@ namespace SIS_projekt
             panelPrikaz.Controls.Add(frmSend);
             frmSend.Show();
         }
+
+        private void btnPrijava_Click(object sender, EventArgs e)
+        {
+            panelPrikaz.Controls.Clear();
+            FrmPrijava frmPrijava = new FrmPrijava();
+            frmPrijava.TopLevel = false;
+            frmPrijava.FormBorderStyle = FormBorderStyle.None;
+            panelPrikaz.Controls.Add(frmPrijava);
+            frmPrijava.Show();
+        }
     }
 }
