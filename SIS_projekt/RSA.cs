@@ -58,7 +58,7 @@ namespace SIS_projekt
                 values["email"] = email;
                 values["noviKljuc"] = javniKljuc;
 
-                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/registriranje.php", values);
+                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/rsaNoviKljuc.php", values);
 
                 var responseString = Encoding.Default.GetString(response);
                

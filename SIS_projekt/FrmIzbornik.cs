@@ -53,7 +53,7 @@ namespace SIS_projekt
         private void btnGeneriranjeKljucaRSA_Click(object sender, EventArgs e)
         {
             panelPrikaz.Controls.Clear();
-            FrmGeneriranjeRSA frmGeneriranjeRsa = new FrmGeneriranjeRSA();
+            FrmGeneriranjeRSA frmGeneriranjeRsa = new FrmGeneriranjeRSA(this);
             frmGeneriranjeRsa.TopLevel = false;
             frmGeneriranjeRsa.FormBorderStyle = FormBorderStyle.None;
             panelPrikaz.Controls.Add(frmGeneriranjeRsa);

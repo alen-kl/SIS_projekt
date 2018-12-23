@@ -32,6 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnGenerirajNoviKljucRSA = new System.Windows.Forms.Button();
+            this.labelUspjesnoGeneriran = new System.Windows.Forms.Label();
+            this.labelSmile = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +72,7 @@
             this.btnGenerirajNoviKljucRSA.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnGenerirajNoviKljucRSA.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnGenerirajNoviKljucRSA.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnGenerirajNoviKljucRSA.Location = new System.Drawing.Point(360, 140);
+            this.btnGenerirajNoviKljucRSA.Location = new System.Drawing.Point(367, 137);
             this.btnGenerirajNoviKljucRSA.Name = "btnGenerirajNoviKljucRSA";
             this.btnGenerirajNoviKljucRSA.Size = new System.Drawing.Size(212, 81);
             this.btnGenerirajNoviKljucRSA.TabIndex = 5;
@@ -78,12 +80,35 @@
             this.btnGenerirajNoviKljucRSA.UseVisualStyleBackColor = false;
             this.btnGenerirajNoviKljucRSA.Click += new System.EventHandler(this.btnGenerirajNoviKljucRSA_Click);
             // 
+            // labelUspjesnoGeneriran
+            // 
+            this.labelUspjesnoGeneriran.AutoSize = true;
+            this.labelUspjesnoGeneriran.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUspjesnoGeneriran.Location = new System.Drawing.Point(400, 307);
+            this.labelUspjesnoGeneriran.Name = "labelUspjesnoGeneriran";
+            this.labelUspjesnoGeneriran.Size = new System.Drawing.Size(377, 32);
+            this.labelUspjesnoGeneriran.TabIndex = 6;
+            this.labelUspjesnoGeneriran.Text = "ključevi su generirani i spremljeni";
+            // 
+            // labelSmile
+            // 
+            this.labelSmile.AutoSize = true;
+            this.labelSmile.Font = new System.Drawing.Font("Segoe UI Semibold", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSmile.ForeColor = System.Drawing.Color.LightGreen;
+            this.labelSmile.Location = new System.Drawing.Point(295, 282);
+            this.labelSmile.Name = "labelSmile";
+            this.labelSmile.Size = new System.Drawing.Size(56, 65);
+            this.labelSmile.TabIndex = 7;
+            this.labelSmile.Text = ":)";
+            // 
             // FrmGeneriranjeRSA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.ClientSize = new System.Drawing.Size(969, 675);
+            this.Controls.Add(this.labelSmile);
+            this.Controls.Add(this.labelUspjesnoGeneriran);
             this.Controls.Add(this.btnGenerirajNoviKljucRSA);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -101,5 +126,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnGenerirajNoviKljucRSA;
+        private System.Windows.Forms.Label labelUspjesnoGeneriran;
+        private System.Windows.Forms.Label labelSmile;
     }
 }

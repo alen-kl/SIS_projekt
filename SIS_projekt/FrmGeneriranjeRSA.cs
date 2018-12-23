@@ -12,17 +12,23 @@ namespace SIS_projekt
 {
     public partial class FrmGeneriranjeRSA : Form
     {
-        public FrmGeneriranjeRSA()
+        private FrmIzbornik parent;
+        public FrmGeneriranjeRSA(FrmIzbornik izbornik)
         {
             InitializeComponent();
+            parent = izbornik;
+            labelSmile.Visible = false;
+            labelUspjesnoGeneriran.Visible = false;
         }
 
         private void btnGenerirajNoviKljucRSA_Click(object sender, EventArgs e)
         {
-            /*
             RSA r = new RSA();
-            r.spremiNoviKljuc("");
-            */
+            r.spremiNoviKljuc(parent.korisnik.Mail);
+            /**/
+            labelSmile.Visible = true;
+            labelUspjesnoGeneriran.Visible = true;
+          
         }
     }
 }
