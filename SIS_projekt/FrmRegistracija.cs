@@ -47,7 +47,7 @@ namespace SIS_projekt
 
             if (status=="uspjesno")
             {
-                MessageBox.Show("Uspješno ste se registrirali. Generirani su vam RSA ključevi.", ":)", MessageBoxButtons.OK);
+                MessageBox.Show("Uspješno ste se registrirali. Generirani su Vam RSA ključevi.", ":)", MessageBoxButtons.OK);
                 this.Close();
             }
             else if (status=="duplikat")

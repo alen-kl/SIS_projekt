@@ -21,18 +21,18 @@ namespace SIS_projekt
         public string privatniKljuc { get; set; }
         public string javniKljuc { get; set; }
 
-        public void generirajKljuceve()
+        public void generirajKljuceve(string email)
         {
             rsa = new RSACryptoServiceProvider();
-            File.WriteAllText("../../RSA/javni_kljuc.txt", rsa.ToXmlString(false));
-            File.WriteAllText("../../RSA/privatni_kljuc.txt", rsa.ToXmlString(true));
+            File.WriteAllText("../../RSA/javni_kljuc_"+email+".txt", rsa.ToXmlString(false));
+            File.WriteAllText("../../RSA/privatni_kljuc_"+email+".txt", rsa.ToXmlString(true));
             privatniKljuc = rsa.ToXmlString(true);
             javniKljuc = rsa.ToXmlString(false);
 
         }
         public string Registriraj(string korisnickoIme, string email, string lozinka)
         {
-            generirajKljuceve();
+            generirajKljuceve(email);
             using (var client = new WebClient())
             {
                 var values = new NameValueCollection();
@@ -51,7 +51,7 @@ namespace SIS_projekt
 
         public void spremiNoviKljuc(string email)
         {
-            generirajKljuceve();
+            generirajKljuceve(email);
             using (var client = new WebClient())
             {
                 var values = new NameValueCollection();
@@ -63,6 +63,47 @@ namespace SIS_projekt
                 var responseString = Encoding.Default.GetString(response);
                
             }
+        }
+
+        //metode za RSAkriptiranje i dekriptiranje
+        public static string Enkripcija(string tekst, string kljuc)
+        {
+            // pretvorba  
+            UnicodeEncoding byteConverter = new UnicodeEncoding();
+            byte[] dataToEncrypt = byteConverter.GetBytes(tekst);
+
+            byte[] encryptedData;
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                // javni ključ 
+                rsa.FromXmlString(kljuc);
+
+                // enkripcija   
+                encryptedData = rsa.Encrypt(dataToEncrypt, false);
+            }
+
+            UnicodeEncoding byteConverter1 = new UnicodeEncoding();
+            return byteConverter1.GetString(encryptedData);
+
+        }
+
+        public static string Dekripcija(string tekst, string kljuc)
+        {
+            byte[] dataToDecrypt = null;
+            // čitanje  
+            UnicodeEncoding byteConverter1 = new UnicodeEncoding();
+            dataToDecrypt = byteConverter1.GetBytes(tekst);
+
+            byte[] decryptedData;
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                // dekripcija 
+                rsa.FromXmlString(kljuc);
+                decryptedData = rsa.Decrypt(dataToDecrypt, false);
+            }
+            // vraćanje stringa   
+            UnicodeEncoding byteConverter = new UnicodeEncoding();
+            return byteConverter.GetString(decryptedData);
         }
 
     }
