@@ -29,18 +29,24 @@
         private void InitializeComponent()
         {
             this.panelIzbornik = new System.Windows.Forms.Panel();
+            this.btnIzlaz = new System.Windows.Forms.Button();
+            this.btnOdjava = new System.Windows.Forms.Button();
             this.btnPosalji = new System.Windows.Forms.Button();
             this.btnKriptiraj = new System.Windows.Forms.Button();
             this.btnGeneriranjeKljucaRSA = new System.Windows.Forms.Button();
             this.btnPrijava = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelPrikaz = new System.Windows.Forms.Panel();
+            this.labelPrijavljeni = new System.Windows.Forms.Label();
             this.panelIzbornik.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelIzbornik
             // 
             this.panelIzbornik.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.panelIzbornik.Controls.Add(this.labelPrijavljeni);
+            this.panelIzbornik.Controls.Add(this.btnIzlaz);
+            this.panelIzbornik.Controls.Add(this.btnOdjava);
             this.panelIzbornik.Controls.Add(this.btnPosalji);
             this.panelIzbornik.Controls.Add(this.btnKriptiraj);
             this.panelIzbornik.Controls.Add(this.btnGeneriranjeKljucaRSA);
@@ -50,6 +56,36 @@
             this.panelIzbornik.Name = "panelIzbornik";
             this.panelIzbornik.Size = new System.Drawing.Size(200, 722);
             this.panelIzbornik.TabIndex = 0;
+            // 
+            // btnIzlaz
+            // 
+            this.btnIzlaz.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnIzlaz.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnIzlaz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIzlaz.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnIzlaz.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnIzlaz.Location = new System.Drawing.Point(22, 659);
+            this.btnIzlaz.Name = "btnIzlaz";
+            this.btnIzlaz.Size = new System.Drawing.Size(160, 50);
+            this.btnIzlaz.TabIndex = 6;
+            this.btnIzlaz.Text = "IZLAZ";
+            this.btnIzlaz.UseVisualStyleBackColor = false;
+            this.btnIzlaz.Click += new System.EventHandler(this.btnIzlaz_Click);
+            // 
+            // btnOdjava
+            // 
+            this.btnOdjava.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnOdjava.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnOdjava.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOdjava.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnOdjava.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnOdjava.Location = new System.Drawing.Point(22, 603);
+            this.btnOdjava.Name = "btnOdjava";
+            this.btnOdjava.Size = new System.Drawing.Size(160, 50);
+            this.btnOdjava.TabIndex = 5;
+            this.btnOdjava.Text = "Odjava";
+            this.btnOdjava.UseVisualStyleBackColor = false;
+            this.btnOdjava.Click += new System.EventHandler(this.btnOdjava_Click);
             // 
             // btnPosalji
             // 
@@ -119,6 +155,16 @@
             this.panelPrikaz.Size = new System.Drawing.Size(987, 722);
             this.panelPrikaz.TabIndex = 1;
             // 
+            // labelPrijavljeni
+            // 
+            this.labelPrijavljeni.AutoSize = true;
+            this.labelPrijavljeni.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPrijavljeni.Location = new System.Drawing.Point(3, 9);
+            this.labelPrijavljeni.Name = "labelPrijavljeni";
+            this.labelPrijavljeni.Size = new System.Drawing.Size(69, 23);
+            this.labelPrijavljeni.TabIndex = 7;
+            this.labelPrijavljeni.Text = "korisnik";
+            // 
             // FrmIzbornik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -132,6 +178,7 @@
             this.Name = "FrmIzbornik";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Izbornik";
+            this.Load += new System.EventHandler(this.FrmIzbornik_Load);
             this.panelIzbornik.ResumeLayout(false);
             this.panelIzbornik.PerformLayout();
             this.ResumeLayout(false);
@@ -147,6 +194,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPosalji;
         private System.Windows.Forms.Button btnKriptiraj;
+        private System.Windows.Forms.Button btnOdjava;
+        private System.Windows.Forms.Button btnIzlaz;
+        private System.Windows.Forms.Label labelPrijavljeni;
     }
 }
 

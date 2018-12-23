@@ -18,9 +18,12 @@ namespace SIS_projekt
 {
     public partial class FrmPrijava : Form
     {
-        public FrmPrijava()
+        public FrmIzbornik parent = null;
+
+        public FrmPrijava(FrmIzbornik izbornik)
         {
             InitializeComponent();
+            this.parent = izbornik;
         }
 
         private void radioMail_CheckedChanged(object sender, EventArgs e)
@@ -79,7 +82,11 @@ namespace SIS_projekt
                 }
                 else
                 {
-                    //prijava
+                    //uspješna prijava
+                    File.WriteAllText("../../zadnjiPrijavljeni.txt", responseString);
+                    parent.korisnik.Mail = responseString;
+                    parent.gumbiPrijavljeni();
+                    this.Close();
                 }
 
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIS_projekt
 {
-    class CurrentUser
+    public class CurrentUser
     {
         public static CurrentUser User { set; get; }
 
