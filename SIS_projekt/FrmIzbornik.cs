@@ -62,6 +62,7 @@ namespace SIS_projekt
 
         private void btnOdjava_Click(object sender, EventArgs e)
         {
+            panelPrikaz.Controls.Clear();
             gumbiOdjavljeni();
             File.WriteAllText("../../zadnjiPrijavljeni.txt", "0");
         }
@@ -72,6 +73,7 @@ namespace SIS_projekt
             btnKriptiraj.Visible = true;
             btnPosalji.Visible = true;
             btnOdjava.Visible = true;
+            btnPreuzimanje.Visible = true;
             btnPrijava.Visible = false;
 
             labelPrijavljeni.Text = CurrentUser.User.Mail;
@@ -84,6 +86,7 @@ namespace SIS_projekt
             btnKriptiraj.Visible = false;
             btnPosalji.Visible = false;
             btnOdjava.Visible = false;
+            btnPreuzimanje.Visible = false;
             btnPrijava.Visible = true;
 
             labelPrijavljeni.Text = "";
@@ -108,6 +111,16 @@ namespace SIS_projekt
         private void btnIzlaz_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnPreuzimanje_Click(object sender, EventArgs e)
+        {
+            panelPrikaz.Controls.Clear();
+            FrmPreuzimanje frmPreuzimanje = new FrmPreuzimanje();
+            frmPreuzimanje.TopLevel = false;
+            frmPreuzimanje.FormBorderStyle = FormBorderStyle.None;
+            panelPrikaz.Controls.Add(frmPreuzimanje);
+            frmPreuzimanje.Show();
         }
     }
 }
