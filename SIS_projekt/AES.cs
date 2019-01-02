@@ -23,12 +23,12 @@ namespace SIS_projekt
             TajniKljuc = aes.Key;
             InicijalizacijskiVektor = aes.IV;
         }
-        
+
         public string enkripcija(byte[] key, byte[] iv, string datoteka)
         {
             byte[] plainText = Encoding.UTF8.GetBytes(datoteka);
             string sifrat;
-            using(aes = new AesCryptoServiceProvider())
+            using (aes = new AesCryptoServiceProvider())
             {
                 aes.Key = key;
                 aes.IV = iv;
@@ -39,6 +39,23 @@ namespace SIS_projekt
 
             return sifrat;
         }
-        
+
+        public static string Dekripcija(string key, string iv, string datoteka)
+        {
+            byte[] kriptiranaDatoteka = Convert.FromBase64String(datoteka);
+            byte[] kljuc = Convert.FromBase64String(key);
+            byte[] inicijalizacijskiVektor = Convert.FromBase64String(iv);
+            string dekriptirano;
+            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            {
+                aes.Key = kljuc;
+                aes.IV = inicijalizacijskiVektor;
+                ICryptoTransform cryptoTransform = aes.CreateDecryptor(aes.Key, aes.IV);
+                byte[] dekriptiranaDatoteka = cryptoTransform.TransformFinalBlock(kriptiranaDatoteka, 0, kriptiranaDatoteka.Length);
+                dekriptirano = Encoding.UTF8.GetString(dekriptiranaDatoteka);
+            }
+            return dekriptirano;
+        }
     }
+
 }

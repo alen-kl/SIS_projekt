@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnOsvjeziPoruke = new System.Windows.Forms.Button();
             this.btnPreuzmi = new System.Windows.Forms.Button();
             this.dgvPoruke = new System.Windows.Forms.DataGridView();
+            this.txtDekriptirano = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPoruke)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             this.btnPreuzmi.Name = "btnPreuzmi";
             this.btnPreuzmi.Size = new System.Drawing.Size(212, 44);
             this.btnPreuzmi.TabIndex = 5;
-            this.btnPreuzmi.Text = "Preuzmi";
+            this.btnPreuzmi.Text = "Preuzmi i dekriptiraj";
             this.btnPreuzmi.UseVisualStyleBackColor = false;
             this.btnPreuzmi.Click += new System.EventHandler(this.btnPreuzmi_Click);
             // 
@@ -69,14 +70,14 @@
             this.dgvPoruke.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
             this.dgvPoruke.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPoruke.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MediumSlateBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Salmon;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPoruke.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MediumSlateBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Salmon;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPoruke.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPoruke.Location = new System.Drawing.Point(7, 66);
             this.dgvPoruke.MultiSelect = false;
             this.dgvPoruke.Name = "dgvPoruke";
@@ -87,12 +88,22 @@
             this.dgvPoruke.Size = new System.Drawing.Size(950, 369);
             this.dgvPoruke.TabIndex = 6;
             // 
+            // txtDekriptirano
+            // 
+            this.txtDekriptirano.Location = new System.Drawing.Point(12, 507);
+            this.txtDekriptirano.Multiline = true;
+            this.txtDekriptirano.Name = "txtDekriptirano";
+            this.txtDekriptirano.ReadOnly = true;
+            this.txtDekriptirano.Size = new System.Drawing.Size(945, 156);
+            this.txtDekriptirano.TabIndex = 7;
+            // 
             // FrmPreuzimanje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.ClientSize = new System.Drawing.Size(969, 675);
+            this.Controls.Add(this.txtDekriptirano);
             this.Controls.Add(this.dgvPoruke);
             this.Controls.Add(this.btnPreuzmi);
             this.Controls.Add(this.btnOsvjeziPoruke);
@@ -101,6 +112,7 @@
             this.Load += new System.EventHandler(this.FrmPreuzimanje_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPoruke)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -108,5 +120,6 @@
         private System.Windows.Forms.Button btnOsvjeziPoruke;
         private System.Windows.Forms.Button btnPreuzmi;
         private System.Windows.Forms.DataGridView dgvPoruke;
+        private System.Windows.Forms.TextBox txtDekriptirano;
     }
 }

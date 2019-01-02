@@ -18,6 +18,8 @@ namespace SIS_projekt
 {
     public partial class FrmPreuzimanje : Form
     {
+        string putanjaPrivatniKljuc = @"..\..\RSA\privatni_kljuc_" + CurrentUser.User.Mail + ".txt";
+        string izlaznaPutanjaDekriptirani = @"..\..\..\";
         public FrmPreuzimanje()
         {
             InitializeComponent();
@@ -73,6 +75,18 @@ namespace SIS_projekt
                 Poruke poruka = dgvPoruke.SelectedRows[0].DataBoundItem as Poruke;
                 string preuzetaPoruka=preuzimanjePoruke(poruka.nazivDatoteke);
                 refreshPoruke();
+                string preuzetiKljuc = PreuzmiKljuc(poruka.nazivDatoteke);
+                string preuzetiIV = PreuzmiIV(poruka.nazivDatoteke);
+                string privatniKljuc = File.ReadAllText(putanjaPrivatniKljuc);
+
+                string dekriptiraniSimetricni = RSA.Dekripcija(preuzetiKljuc, privatniKljuc);
+                string dekriptiraniIV = RSA.Dekripcija(preuzetiIV, privatniKljuc);
+                string dekriptiranaDatoteka = AES.Dekripcija(dekriptiraniSimetricni, dekriptiraniIV, preuzetaPoruka);
+                txtDekriptirano.Text = dekriptiranaDatoteka;
+
+                string putanja = izlaznaPutanjaDekriptirani + "Dec_" + poruka.nazivDatoteke;
+                File.WriteAllText(putanja, dekriptiranaDatoteka);
+                MessageBox.Show("Datoteka je preuzeta i dekriptirana! Naziv dekriptirane datoteke: " + "Dec_" + poruka.nazivDatoteke);
             }
         }
 
@@ -84,6 +98,32 @@ namespace SIS_projekt
                 values["datotekaIme"] = naziv;
 
                 var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/downloadDatoteke.php", values);
+                var responseString = Encoding.Default.GetString(response);
+                return responseString;
+            }
+        }
+
+        private string PreuzmiKljuc(string naziv)
+        {
+            using (var client = new WebClient())
+            {
+                var values = new NameValueCollection();
+                values["datotekaIme"] = naziv;
+
+                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/downloadKljuca.php", values);
+                var responseString = Encoding.Default.GetString(response);
+                return responseString;
+            }
+        }
+
+        private string PreuzmiIV(string naziv)
+        {
+            using (var client = new WebClient())
+            {
+                var values = new NameValueCollection();
+                values["datotekaIme"] = naziv;
+
+                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/downloadIV.php", values);
                 var responseString = Encoding.Default.GetString(response);
                 return responseString;
             }

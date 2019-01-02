@@ -95,8 +95,8 @@ namespace SIS_projekt
 
                     string sifrat = aes.enkripcija(aes.TajniKljuc, aes.InicijalizacijskiVektor, datoteka);
 
-                    izlaznaPutanjaKriptirani += "Enc_" + fileName;
-                    File.WriteAllText(izlaznaPutanjaKriptirani, sifrat);
+                    string izlaznaPutanjaKriptirani2 = izlaznaPutanjaKriptirani + "Enc_" + fileName;
+                    File.WriteAllText(izlaznaPutanjaKriptirani2, sifrat);
                     label1.Text = "Kriptirani tekst";
                     ucitaniTeksttxt.Text = sifrat;
                     MessageBox.Show("Datoteka kriptirana!");
