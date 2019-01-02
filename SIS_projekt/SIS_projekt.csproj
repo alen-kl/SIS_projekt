@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AES.cs" />
     <Compile Include="CurrentUser.cs" />
     <Compile Include="FrmGeneriranjeRSA.cs">
       <SubType>Form</SubType>

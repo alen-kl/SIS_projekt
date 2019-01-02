@@ -14,9 +14,8 @@ namespace SIS_projekt
 {
     public partial class Simetricno : Form
     {
-        AesCryptoServiceProvider AES = new AesCryptoServiceProvider();
-        byte[] tajniKljuc = null;
-        byte[] inicijalizacijskiVektor = null;
+        AES aes = new AES();
+     
         string datoteka = "";
         string fileName = "";
 
@@ -47,18 +46,15 @@ namespace SIS_projekt
 
         private void btnGenerirajKljuc_Click(object sender, EventArgs e)
         {
-            AES.KeySize = 256;
-            AES.Mode = CipherMode.CBC;
-            AES.GenerateKey();
-            AES.GenerateIV();
+            aes.generirajKljuc();
 
             using (StreamWriter streamWriter = new StreamWriter(putanjaTajniKljuc))
             {
-                streamWriter.WriteLine(Convert.ToBase64String(AES.Key));
-                streamWriter.WriteLine(Convert.ToBase64String(AES.IV));
+                streamWriter.WriteLine(Convert.ToBase64String(aes.TajniKljuc));
+                streamWriter.WriteLine(Convert.ToBase64String(aes.InicijalizacijskiVektor));
             }
 
-            generiraniKljuctxt.Text = Convert.ToBase64String(AES.Key);
+            generiraniKljuctxt.Text = Convert.ToBase64String(aes.TajniKljuc);
             MessageBox.Show("Generiran ključ i inicijalizacijski vektor");
         }
 
@@ -74,7 +70,7 @@ namespace SIS_projekt
                 }
                 else
                 {
-                    tajniKljuc = Convert.FromBase64String(kljuc);
+                    aes.TajniKljuc = Convert.FromBase64String(kljuc);
                 }
 
                 string vektor = streamReader.ReadLine();
@@ -84,7 +80,7 @@ namespace SIS_projekt
                 }
                 else
                 {
-                    inicijalizacijskiVektor = Convert.FromBase64String(vektor);
+                    aes.InicijalizacijskiVektor = Convert.FromBase64String(vektor);
                 }
             }
         }
@@ -95,13 +91,10 @@ namespace SIS_projekt
             {
                 try
                 {
-                    byte[] plainText = Encoding.UTF8.GetBytes(datoteka);
                     UcitajKljuc();
-                    AES.Key = tajniKljuc;
-                    AES.IV = inicijalizacijskiVektor;
-                    ICryptoTransform cryptoTransform = AES.CreateEncryptor(AES.Key, AES.IV);
-                    byte[] kriptiranaDatoteka = cryptoTransform.TransformFinalBlock(plainText, 0, plainText.Length);
-                    string sifrat = Convert.ToBase64String(kriptiranaDatoteka);
+
+                    string sifrat = aes.enkripcija(aes.TajniKljuc, aes.InicijalizacijskiVektor, datoteka);
+
                     izlaznaPutanjaKriptirani += "Enc_" + fileName;
                     File.WriteAllText(izlaznaPutanjaKriptirani, sifrat);
                     label1.Text = "Kriptirani tekst";
