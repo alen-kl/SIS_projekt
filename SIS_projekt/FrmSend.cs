@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +17,11 @@ namespace SIS_projekt
 {
     public partial class FrmSend : Form
     {
-        private RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(2048);
 
         string inicijalniDirektorij = @"C:\Users\Darko\FAKS\DS_1_semestar\SIS\PROJEKT\SIS_projekt";//promijeniti na kraju na C:\ ili na svoju putanju
         string putanjaTajniKljuc = @"..\..\..\simetricni_kljuc.txt";
         string putanjaPrimatelji = @"..\..\..\primatelji.txt";
-        string putanjaJavniKljuc = @"..\..\..\javni_kljuc.txt";//samo za testiranje
+        
 
         string datoteka = "";
         string fileName = "";
@@ -82,12 +83,38 @@ namespace SIS_projekt
             }
         }
 
-        //TODO  metoda za dohvat iz baze javnog ključa primatelja prema mail-u primatelja
+        //  metoda za dohvat iz baze javnog ključa primatelja prema mail-u primatelja
+        private void DohvatiJavniKljucPrimatelja()
+        {
+  
+            using (var client = new WebClient())
+            {
+                var values = new NameValueCollection();
+                if(cmbPrimatelji.SelectedIndex > -1)
+                {
+                    values["mail"] = cmbPrimatelji.SelectedItem.ToString();
+                    var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/getJavniRSA.php", values);
+                    javniKljuc = Encoding.Default.GetString(response);
+                    if (string.IsNullOrWhiteSpace(javniKljuc))
+                    {
+                        MessageBox.Show("Greška prilikom dohvata javnog ključa!");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Morate odabrati primatelja!");
+                }
+                
+            }
+            
+            
+        }
 
 
         private void UcitajKljuceve()
         {
-            javniKljuc = XElement.Load(putanjaJavniKljuc).ToString();//za testiranje
+            DohvatiJavniKljucPrimatelja();
 
             using (StreamReader streamReader = new StreamReader(putanjaTajniKljuc))
             {
@@ -114,21 +141,31 @@ namespace SIS_projekt
             UcitajKljuceve();
             KriptirajSimetricni();
 
-            //TODO provjeri da li su unešeni podaci i pošalji na server
+
+            // provjeri da li su unešeni podaci i pošalji na server
+            if (ProvjeriPodatke())
+            {
+                Posalji();
+            }
         }
 
         private void KriptirajSimetricni()
         {
             try
             {
-                RSA.FromXmlString(javniKljuc);
-                byte[] kljuc = RSA.Encrypt(Encoding.UTF8.GetBytes(simetricniKljuc), false);
-                byte[] iv = RSA.Encrypt(Encoding.UTF8.GetBytes(inicijalizacijskiVektor), false);
-                kriptiraniSimetricniKljuc = Convert.ToBase64String(kljuc);
-                kriptiraniInicijalizacijskiVektor = Convert.ToBase64String(iv);
+                if(string.IsNullOrWhiteSpace(simetricniKljuc) || string.IsNullOrWhiteSpace(javniKljuc))
+                {
+                    MessageBox.Show("Nije učitan simetrični ili javni ključ!");
+                }
+                else
+                {
+                    kriptiraniSimetricniKljuc = RSA.Enkripcija(simetricniKljuc, javniKljuc);
+                    kriptiraniInicijalizacijskiVektor = RSA.Enkripcija(inicijalizacijskiVektor, javniKljuc);
 
-                //TEST
-                //File.WriteAllText(@"..\..\..\kriptiraniSimetricni.txt", kriptiraniSimetricniKljuc);
+                    //MessageBox.Show(kriptiraniSimetricniKljuc);
+                }
+                
+
             }
             catch(Exception ex)
             {
@@ -136,6 +173,60 @@ namespace SIS_projekt
             }
         }
 
+        private bool ProvjeriPodatke()
+        {
+            bool odabrano = true;
+            if (string.IsNullOrWhiteSpace(datoteka))
+            {
+                odabrano = false;
+                MessageBox.Show("Niste odabrali kriptiranu datoteku!");
+            }
+            if(cmbPrimatelji.SelectedIndex == -1)
+            {
+                odabrano = false;
+                MessageBox.Show("Odaberite primatelja");
+            }
+            if(string.IsNullOrWhiteSpace(kriptiraniSimetricniKljuc) || string.IsNullOrWhiteSpace(kriptiraniInicijalizacijskiVektor))
+            {
+                odabrano = false;
+                MessageBox.Show("Nije kriptiran simetrični ključ");
+            }
+
+            return odabrano;
+        }
+
         //TODO metoda za slanje podataka na server
+        private void Posalji()
+        {
+            if (string.IsNullOrEmpty(CurrentUser.User.Mail))
+            {
+                MessageBox.Show("Morate se prijaviti");
+            }
+            else
+            {
+                using (var client = new WebClient())
+                {
+                    var values = new NameValueCollection();
+                    values["posiljatelj"] = CurrentUser.User.Mail;
+                    values["primatelj"] = cmbPrimatelji.SelectedItem.ToString();
+                    values["datoteka"] = datoteka;
+                    values["datotekaIme"] = fileName;
+                    values["kljuc"] = kriptiraniSimetricniKljuc;
+                    values["iv"] = kriptiraniInicijalizacijskiVektor;
+
+                    var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/uploadDatoteke.php", values);
+                    string zapisano = Encoding.Default.GetString(response);
+                    if (zapisano.Equals("zapisano"))
+                    {
+                        MessageBox.Show("Podaci poslani!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Greška kod prijenosa podataka!");
+                    }
+                }
+            }
+            
+        }
     }
 }

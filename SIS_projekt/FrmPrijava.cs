@@ -84,7 +84,7 @@ namespace SIS_projekt
                 {
                     //uspješna prijava
                     File.WriteAllText("../../zadnjiPrijavljeni.txt", responseString);
-                    parent.korisnik.Mail = responseString;
+                    CurrentUser.User = new CurrentUser(responseString);
                     parent.gumbiPrijavljeni();
                     this.Close();
                 }

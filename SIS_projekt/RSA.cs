@@ -69,8 +69,8 @@ namespace SIS_projekt
         public static string Enkripcija(string tekst, string kljuc)
         {
             // pretvorba  
-            UnicodeEncoding byteConverter = new UnicodeEncoding();
-            byte[] dataToEncrypt = byteConverter.GetBytes(tekst);
+            
+            byte[] dataToEncrypt = Encoding.UTF8.GetBytes(tekst);
 
             byte[] encryptedData;
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
@@ -83,7 +83,7 @@ namespace SIS_projekt
             }
 
             UnicodeEncoding byteConverter1 = new UnicodeEncoding();
-            return byteConverter1.GetString(encryptedData);
+            return Convert.ToBase64String(encryptedData);
 
         }
 
@@ -91,8 +91,8 @@ namespace SIS_projekt
         {
             byte[] dataToDecrypt = null;
             // čitanje  
-            UnicodeEncoding byteConverter1 = new UnicodeEncoding();
-            dataToDecrypt = byteConverter1.GetBytes(tekst);
+            
+            dataToDecrypt = Convert.FromBase64String(tekst);
 
             byte[] decryptedData;
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
@@ -102,8 +102,8 @@ namespace SIS_projekt
                 decryptedData = rsa.Decrypt(dataToDecrypt, false);
             }
             // vraćanje stringa   
-            UnicodeEncoding byteConverter = new UnicodeEncoding();
-            return byteConverter.GetString(decryptedData);
+            
+            return Encoding.UTF8.GetString(decryptedData);
         }
 
     }

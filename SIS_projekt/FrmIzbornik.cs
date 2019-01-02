@@ -13,7 +13,7 @@ namespace SIS_projekt
 {
     public partial class FrmIzbornik : Form
     {
-        public CurrentUser korisnik = new CurrentUser("null");
+        
         public FrmIzbornik()
         {
             InitializeComponent();
@@ -74,7 +74,7 @@ namespace SIS_projekt
             btnOdjava.Visible = true;
             btnPrijava.Visible = false;
 
-            labelPrijavljeni.Text = korisnik.Mail;
+            labelPrijavljeni.Text = CurrentUser.User.Mail;
             labelPrijavljeni.Visible = true;
         }
 
@@ -99,7 +99,8 @@ namespace SIS_projekt
             }
             else
             {
-                this.korisnik.Mail = File.ReadAllText("../../zadnjiPrijavljeni.txt");
+                CurrentUser.User = new CurrentUser(File.ReadAllText("../../zadnjiPrijavljeni.txt"));
+                
                 gumbiPrijavljeni();
             }
         }

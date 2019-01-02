@@ -1,0 +1,8 @@
+﻿Jedan od osnovnih načina zaštite vjerodostojnosti informacije je potpis. 
+Potpis treba biti jedinstven i služi prilikom identifikacije i provjere pojedinca.
+
+CIA
+
+Povjerljivost
+Integritet
+Dostupnost

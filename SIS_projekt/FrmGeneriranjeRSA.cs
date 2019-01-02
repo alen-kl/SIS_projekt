@@ -24,7 +24,7 @@ namespace SIS_projekt
         private void btnGenerirajNoviKljucRSA_Click(object sender, EventArgs e)
         {
             RSA r = new RSA();
-            r.spremiNoviKljuc(parent.korisnik.Mail);
+            r.spremiNoviKljuc(CurrentUser.User.Mail);
             /**/
             labelSmile.Visible = true;
             labelUspjesnoGeneriran.Visible = true;
