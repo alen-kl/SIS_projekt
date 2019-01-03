@@ -73,20 +73,31 @@ namespace SIS_projekt
             if (dgvPoruke.SelectedRows.Count > 0)
             {
                 Poruke poruka = dgvPoruke.SelectedRows[0].DataBoundItem as Poruke;
-                string preuzetaPoruka=preuzimanjePoruke(poruka.nazivDatoteke);
+                string preuzetaPoruka=preuzimanjePoruke(poruka.nazivDatoteke);//preuzetaPoruka je preuzeta kriptirana datoteka
                 refreshPoruke();
-                string preuzetiKljuc = PreuzmiKljuc(poruka.nazivDatoteke);
-                string preuzetiIV = PreuzmiIV(poruka.nazivDatoteke);
+               
                 string privatniKljuc = File.ReadAllText(putanjaPrivatniKljuc);
 
-                string dekriptiraniSimetricni = RSA.Dekripcija(preuzetiKljuc, privatniKljuc);
-                string dekriptiraniIV = RSA.Dekripcija(preuzetiIV, privatniKljuc);
+                string dekriptiraniSimetricni = RSA.Dekripcija(poruka.decSimetricniKljuc, privatniKljuc);
+                string dekriptiraniIV = RSA.Dekripcija(poruka.IV, privatniKljuc);
                 string dekriptiranaDatoteka = AES.Dekripcija(dekriptiraniSimetricni, dekriptiraniIV, preuzetaPoruka);
                 txtDekriptirano.Text = dekriptiranaDatoteka;
 
+                string javniKljucPosiljatelja = DohvatiJavniKljucPosiljatelja(poruka.posiljatelj);
+                bool provjeraPotpisa = RSA.ProvjeriPotpis(dekriptiranaDatoteka, poruka.hash, javniKljucPosiljatelja);
+                string porukaValidacijePotpisa;
+                if(provjeraPotpisa == true)
+                {
+                    porukaValidacijePotpisa = "Potpis je valjan! Sažeci su isti!";
+                }
+                else
+                {
+                    porukaValidacijePotpisa = "Potpis nije valjan! Promijenjena je originalna datoteka ili nije potpisana od pošiljatelja!";
+                }
+
                 string putanja = izlaznaPutanjaDekriptirani + "Dec_" + poruka.nazivDatoteke;
                 File.WriteAllText(putanja, dekriptiranaDatoteka);
-                MessageBox.Show("Datoteka je preuzeta i dekriptirana! Naziv dekriptirane datoteke: " + "Dec_" + poruka.nazivDatoteke);
+                MessageBox.Show("Datoteka je preuzeta i dekriptirana! Naziv dekriptirane datoteke: " + "Dec_" + poruka.nazivDatoteke + Environment.NewLine + porukaValidacijePotpisa);
             }
         }
 
@@ -103,30 +114,22 @@ namespace SIS_projekt
             }
         }
 
-        private string PreuzmiKljuc(string naziv)
+        private string DohvatiJavniKljucPosiljatelja(string posiljateljMail)
         {
+            string javniKljuc;
             using (var client = new WebClient())
             {
                 var values = new NameValueCollection();
-                values["datotekaIme"] = naziv;
-
-                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/downloadKljuca.php", values);
-                var responseString = Encoding.Default.GetString(response);
-                return responseString;
+                values["mail"] = posiljateljMail;
+                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/getJavniRSA.php", values);
+                javniKljuc = Encoding.Default.GetString(response);
+                if (string.IsNullOrWhiteSpace(javniKljuc))
+                {
+                    MessageBox.Show("Greška prilikom dohvata javnog ključa!");
+                }
             }
-        }
 
-        private string PreuzmiIV(string naziv)
-        {
-            using (var client = new WebClient())
-            {
-                var values = new NameValueCollection();
-                values["datotekaIme"] = naziv;
-
-                var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/downloadIV.php", values);
-                var responseString = Encoding.Default.GetString(response);
-                return responseString;
-            }
+            return javniKljuc;
         }
     }
 }

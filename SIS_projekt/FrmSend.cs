@@ -21,9 +21,11 @@ namespace SIS_projekt
         string inicijalniDirektorij = @"C:\Users\Darko\FAKS\DS_1_semestar\SIS\PROJEKT\SIS_projekt";//promijeniti na kraju na C:\ ili na svoju putanju
         string putanjaTajniKljuc = @"..\..\..\simetricni_kljuc.txt";
         string putanjaPrimatelji = @"..\..\..\primatelji.txt";
-        
+        string putanjaPrivatniKljuc = @"..\..\RSA\privatni_kljuc_" + CurrentUser.User.Mail + ".txt";
+
 
         string datoteka = "";
+        string datotekaZaHash = "";
         string fileName = "";
 
         string javniKljuc = "";
@@ -31,6 +33,7 @@ namespace SIS_projekt
         string inicijalizacijskiVektor = "";
         string kriptiraniSimetricniKljuc = "";
         string kriptiraniInicijalizacijskiVektor = "";
+        string digitalniPotpis = "";
 
         public FrmSend()
         {
@@ -140,7 +143,7 @@ namespace SIS_projekt
         {
             UcitajKljuceve();
             KriptirajSimetricni();
-
+            PotpisiDatZaHash();
 
             // provjeri da li su unešeni podaci i pošalji na server
             if (ProvjeriPodatke())
@@ -176,6 +179,11 @@ namespace SIS_projekt
         private bool ProvjeriPodatke()
         {
             bool odabrano = true;
+            if (string.IsNullOrWhiteSpace(datotekaZaHash))
+            {
+                odabrano = false;
+                MessageBox.Show("Odaberite originalnu datoteku za digitalni potpis!");
+            }
             if (string.IsNullOrWhiteSpace(datoteka))
             {
                 odabrano = false;
@@ -190,6 +198,11 @@ namespace SIS_projekt
             {
                 odabrano = false;
                 MessageBox.Show("Nije kriptiran simetrični ključ");
+            }
+            if (string.IsNullOrWhiteSpace(digitalniPotpis))
+            {
+                odabrano = false;
+                MessageBox.Show("Nije napravljen digitalni potpis!");
             }
 
             return odabrano;
@@ -213,6 +226,7 @@ namespace SIS_projekt
                     values["datotekaIme"] = fileName;
                     values["kljuc"] = kriptiraniSimetricniKljuc;
                     values["iv"] = kriptiraniInicijalizacijskiVektor;
+                    values["hash"] = digitalniPotpis;
 
                     var response = client.UploadValues("https://siskriptiranje.000webhostapp.com/uploadDatoteke.php", values);
                     string zapisano = Encoding.Default.GetString(response);
@@ -227,6 +241,42 @@ namespace SIS_projekt
                 }
             }
             
+        }
+
+        private void btnOdabirDatotekeZaHash_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "TXT files|*.txt";
+            fileDialog.InitialDirectory = inicijalniDirektorij;
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                txtDatotekaZaHash.Text = fileDialog.FileName;
+                
+                datotekaZaHash = File.ReadAllText(txtDatotekaZaHash.Text, Encoding.UTF8);
+
+
+            }
+        }
+
+        private void PotpisiDatZaHash()
+        {
+            if (string.IsNullOrWhiteSpace(datotekaZaHash))
+            {
+                MessageBox.Show("Odaberite originalnu datoteku za digitalni potpis!");
+            }
+            else
+            {
+                string privatniKljuc = File.ReadAllText(putanjaPrivatniKljuc);
+                if (string.IsNullOrWhiteSpace(privatniKljuc))
+                {
+                    MessageBox.Show("Morate generirati privatni RSA ključ!");
+                }
+                else
+                {
+                    digitalniPotpis = RSA.DigitalniPotpis(datotekaZaHash, privatniKljuc);
+                }
+            }
         }
     }
 }

@@ -106,5 +106,39 @@ namespace SIS_projekt
             return Encoding.UTF8.GetString(decryptedData);
         }
 
+        public static string DigitalniPotpis(string datoteka, string privatniKljuc)
+        {
+            string digitalniPotpisString;
+            SHA256 sha = SHA256.Create();
+            byte[] datotekaBytes = Encoding.UTF8.GetBytes(datoteka);
+            byte[] sazetak = sha.ComputeHash(datotekaBytes);
+
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(privatniKljuc);
+                byte[] digitalniPotpis = rsa.SignHash(sazetak, CryptoConfig.MapNameToOID("SHA256"));
+                digitalniPotpisString = Convert.ToBase64String(digitalniPotpis);
+
+            }
+
+            return digitalniPotpisString;
+        }
+
+        public static bool ProvjeriPotpis(string datoteka, string digitalniPotpis, string javniKljuc)
+        {
+            byte[] signedHash = Convert.FromBase64String(digitalniPotpis);
+            SHA256 sha = SHA256.Create();
+            byte[] datotekaBytes = Encoding.UTF8.GetBytes(datoteka);
+            byte[] sazetak = sha.ComputeHash(datotekaBytes);
+            bool provjera;
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(javniKljuc);
+                provjera = rsa.VerifyHash(sazetak, "SHA256", signedHash);
+            }
+
+            return provjera;
+        }
+
     }
 }
