@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRegistracija));
             this.txtKorisnicko = new System.Windows.Forms.TextBox();
             this.txtEMail = new System.Windows.Forms.TextBox();
             this.txtLozinka = new System.Windows.Forms.TextBox();
@@ -161,6 +162,7 @@
             this.Controls.Add(this.txtEMail);
             this.Controls.Add(this.txtKorisnicko);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmRegistracija";
             this.Opacity = 0.95D;
