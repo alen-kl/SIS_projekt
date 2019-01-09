@@ -18,7 +18,7 @@ namespace SIS_projekt
     public partial class FrmSend : Form
     {
 
-        string inicijalniDirektorij = @"C:\Users\Darko\FAKS\DS_1_semestar\SIS\PROJEKT\SIS_projekt";//promijeniti na kraju na C:\ ili na svoju putanju
+        string inicijalniDirektorij = @"..\..\..\" + Environment.CurrentDirectory;
         string putanjaTajniKljuc = @"..\..\..\simetricni_kljuc.txt";
         string putanjaPrimatelji = @"..\..\..\primatelji.txt";
         string putanjaPrivatniKljuc = @"..\..\RSA\privatni_kljuc_" + CurrentUser.User.Mail + ".txt";

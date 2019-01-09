@@ -1,0 +1,5 @@
+Digitalni potpis osigurava tri sigurnosna zahtjeva: autentifikaciju, integritet poruke i neporecivost. 
+Osoba B želi biti sigurna da joj poruku šalje baš osoba A, a ne netko drugi. 
+Također, osoba B želi biti sigurna da poruka nije promijenjena tijekom komunikacije odnosno da je očuvan integritet poruke. 
+Osoba A ne može poreći da je poruku poslala. Kriptografski sustav sa javnim i privatnim ključem omogućuje ostvarenje digitalnog potpisa. 
+Osnova za utvrđivanje integriteta je izrada kriptografskog sažetka poruke (eng. cryptographic digest).

@@ -19,7 +19,7 @@ namespace SIS_projekt
         string datoteka = "";
         string fileName = "";
 
-        string inicijalniDirektorij = @"C:\Users\Darko\FAKS\DS_1_semestar\SIS\PROJEKT\SIS_projekt";//promijeniti na kraju na C:\ ili na svoju putanju
+        string inicijalniDirektorij = @"..\..\..\" + Environment.CurrentDirectory;
         string putanjaTajniKljuc = @"..\..\..\simetricni_kljuc.txt";
         string izlaznaPutanjaKriptirani = @"..\..\..\";
 
